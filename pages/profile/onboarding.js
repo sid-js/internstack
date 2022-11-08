@@ -2,55 +2,60 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Alert, Button, Spinner } from "flowbite-react";
 import { useRouter } from "next/router";
 import React, { use, useEffect, useState } from "react";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 const Onboarding = () => {
   const supabase = useSupabaseClient();
   const [available, setAvailable] = useState();
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const session = useSession();
   const router = useRouter();
-  
+
   useEffect(() => {
-    if(session){
-        checkPreviousUsername();
-      }
-  }, [session])
-  
-  const checkPreviousUsername = async () =>{
-    const {data:isUsername} = await supabase.from("profiles").select("username").eq("id",session.user.id).single();
-    console.log(isUsername.username);
-    if(isUsername.username) {
-        router.push('/');
+    if (session) {
+      checkPreviousUsername();
     }
-  }
-  
-  
+  }, [session]);
+
+  const checkPreviousUsername = async () => {
+    const { data: isUsername } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("id", session.user.id)
+      .single();
+    console.log(isUsername.username);
+    if (isUsername.username) {
+      router.push("/");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-        const username = e.target.username.value;
-        const { data: checkUsername, error } = await supabase
+    const username = e.target.username.value;
+    const { data: checkUsername, error } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("username", username)
+      .single();
+    setLoading(false);
+    if (checkUsername) {
+      setAvailable(false);
+    } else {
+      setAvailable(true);
+      const { error } = await supabase
         .from("profiles")
-        .select("username")
-        .eq("username", username)
-        .single();
-        setLoading(false);
-      if (checkUsername) {
-        setAvailable(false);
+        .update({ username: username })
+        .eq("id", session.user.id);
+      if (error) {
+        console.log(error);
+        toast.error("Unable to create profile. Please try again.");
       } else {
-        setAvailable(true);
-        const {error} = await supabase.from("profiles").update({username: username}).eq("id",session.user.id);
-        if(error){
-          console.log(error);
-          toast.error("Unable to create profile. Please try again.")
-        }
-        else {
-          toast.success("Your Profile has been created successfully.")
-          router.push('/dashboard/profile');
-        }
+        toast.success("Your Profile has been created successfully.");
+        router.push("/dashboard/profile");
       }
     }
+  };
 
   return (
     <div className="relative sm:py-6">
@@ -79,7 +84,8 @@ const Onboarding = () => {
                   htmlFor="username"
                   className="text-gray-600 dark:text-gray-300"
                 >
-                  Enter a username for your profile and proceed to complete your profile.
+                  Enter a username for your profile and proceed to complete your
+                  profile.
                 </label>
                 <div className="relative flex items-center">
                   <svg
@@ -114,7 +120,11 @@ const Onboarding = () => {
                       type="submit"
                       className="relative flex items-center justify-center w-8 h-8 gap-3 ml-auto bg-blue-500 rounded-full sm:w-max sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
                     >
-                      {loading?(<Spinner className="mr-2" size="md"></Spinner>):(<></>)}
+                      {loading ? (
+                        <Spinner className="mr-2" size="md"></Spinner>
+                      ) : (
+                        <></>
+                      )}
                       <span className="relative hidden text-base font-semibold text-white dark:text-gray-900 sm:block">
                         Next
                       </span>
@@ -145,12 +155,13 @@ const Onboarding = () => {
                 <></>
               )}
               <p className="text-sm text-gray-500">
-                Username must only contain alphanumeric characters and underscores and must be greater than 4 characters.
-                <br/>
-                <br/>
+                Username must only contain alphanumeric characters and
+                underscores and must be greater than 4 characters.
+                <br />
+                <br />
               </p>
               <p className="pt-6 text-sm text-gray-500 border-t border-gray-100 dark:border-gray-700 dark:text-gray-400">
-                Don't have an account ?
+                Don&lsquo;t have an account
                 <a href="#" className="text-primary">
                   Sign up
                 </a>
