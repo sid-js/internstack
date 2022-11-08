@@ -4,7 +4,7 @@ import {HiOutlineDocumentMagnifyingGlass,HiOutlinePuzzlePiece,HiOutlineUsers} fr
 
 export default function SideMenu() {
   return (
-    <div className="w-fit">
+    <div className="rounded-full drop-shadow-md w-fit">
     <Sidebar>
     <Sidebar.Items>
       <Sidebar.ItemGroup>
