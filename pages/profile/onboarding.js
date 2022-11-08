@@ -1,5 +1,6 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Alert, Button, Spinner } from "flowbite-react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
