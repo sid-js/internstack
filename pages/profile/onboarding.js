@@ -26,7 +26,7 @@ const Onboarding = () => {
       .single();
     console.log(isUsername.username);
     if (isUsername.username) {
-      router.push("/");
+      router.push(`/profile/${isUsername.username}`);
     }
   };
 

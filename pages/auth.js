@@ -8,16 +8,25 @@ const Auth = () => {
   async function signInWithGoogle() {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
+          options: {
+            redirectTo: '/profile/onboarding'
+          }
         })
       }
       async function signInWithGitHub() {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'github',
+          options: {
+            redirectTo: '/profile/onboarding'
+          }
         })
       }
       async function signInWithLinkedIn() {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'linkedin',
+          options: {
+            redirectTo: '/profile/onboarding'
+          }
         })
       }
 
