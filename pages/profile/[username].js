@@ -7,6 +7,9 @@ import {HiOutlineBuildingLibrary, HiOutlineMapPin} from 'react-icons/hi2'
 const Profile = ({ Profile }) => {
   return (
     <HomeLayout>
+      <Head>
+        <title>{Profile.username} - Profile</title>
+      </Head>
       <div className="flex flex-col w-full my-6 bg-white rounded-lg drop-shadow-md">
         <div className="flex flex-row rounded-t-lg h-36 bg-gradient-to-r from-blue-700 to-blue-500"></div>
         <div className="self-start px-8 -mt-28">
