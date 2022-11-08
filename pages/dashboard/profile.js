@@ -8,6 +8,7 @@ import Select from "react-select";
 import skillsoptions from "../../utils/skillsoptions";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
+import Head from "next/head";
 
 const Profile = (props) => {
   const supabase = useSupabaseClient();

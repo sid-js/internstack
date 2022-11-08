@@ -3,6 +3,7 @@ import { HomeLayout } from "../../components/HomeLayout";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Avatar } from "flowbite-react";
 import {HiOutlineBuildingLibrary, HiOutlineMapPin} from 'react-icons/hi2'
+import Head from "next/head";
 
 const Profile = ({ Profile }) => {
   return (
