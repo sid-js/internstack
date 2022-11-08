@@ -1,5 +1,6 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Alert, Button, Spinner } from "flowbite-react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -59,6 +60,9 @@ const Onboarding = () => {
 
   return (
     <div className="relative sm:py-6">
+      <Head>
+        <title>Onboarding - Profile</title>
+      </Head>
       <div
         aria-hidden="true"
         className="absolute inset-0 grid grid-cols-2 transition duration-300 -space-x-52 opacity-40 delay-0"

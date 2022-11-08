@@ -8,6 +8,7 @@ import Select from "react-select";
 import skillsoptions from "../../utils/skillsoptions";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
+import Head from "next/head";
 
 const Profile = (props) => {
   const supabase = useSupabaseClient();
@@ -36,6 +37,9 @@ const Profile = (props) => {
   console.log(props.Profile);
   return (
     <DashboardLayout>
+      <Head>
+        <title>Dashboard - Profile</title>
+      </Head>
       <div className="w-full p-5">
         <h1 className="text-3xl font-bold">Profile Details</h1>
         <form

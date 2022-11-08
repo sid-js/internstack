@@ -1,4 +1,5 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import Head from "next/head";
 import React from "react";
 
 
@@ -22,6 +23,9 @@ const Auth = () => {
 
   return (
     <div className="relative py-16">
+      <Head>
+        <title>Sign in - Internstack</title>
+      </Head>
       <div className="container relative px-6 m-auto text-gray-500 md:px-12 xl:px-40">
         <div className="m-auto md:w-8/12 lg:w-6/12 xl:w-6/12">
           <div className="bg-white border border-gray-100 shadow-2xl rounded-3xl dark:border-gray-700 dark:bg-gray-800 shadow-gray-600/10 dark:shadow-none">
