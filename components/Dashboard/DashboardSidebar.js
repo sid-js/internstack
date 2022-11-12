@@ -4,7 +4,7 @@ import {HiOutlineUser,HiOutlineBuildingOffice2} from 'react-icons/hi2';
 
 const DashboardSidebar = () => {
   return (
-    <div className="w-fit">
+    <div className="hidden w-fit md:block">
       <Sidebar aria-label="Default sidebar example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
