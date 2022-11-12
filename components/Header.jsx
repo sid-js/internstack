@@ -114,7 +114,7 @@ const Header = () => {
       <Navbar.Collapse className="absolute left-0 z-50 px-2 mx-auto rounded-md top-20 bg-slate-100 md:hidden">
         <Navbar.Link
           className="rounded-lg"
-          href="/navbars"
+          href="/"
           active={router.pathname == "/" ? true : false}
         >
           <div className="flex flex-row items-center w-full gap-3">
