@@ -37,12 +37,12 @@ const Header = () => {
     <Navbar border fluid>
       <Navbar.Brand href="/">
         <img
-          className="px-6 sm:h-8 md:h-14"
+          className="px-2 w-[60%]"
           src="/internstack-logo.svg"
           alt="Internstack"
         />
       </Navbar.Brand>
-      <div className="flex gap-6 md:order-2">
+      <div className="flex">
         {!session ? (
           <Button
             onClick={() => {
@@ -59,7 +59,7 @@ const Header = () => {
             inline={true}
             label={
               <div className="flex items-center justify-between px-3 py-2 border border-gray-200 hover:bg-blue-100 rounded-xl">
-                <span className="px-2 text-xl font-semibold">@{username}</span>
+                <span className="px-2 text-xl font-semibold">{username?`@${username}`:"Complete My Profile"}</span>
                 <Avatar
                   alt="User"
                   img={session.user.user_metadata.avatar_url}

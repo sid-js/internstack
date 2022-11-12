@@ -9,7 +9,7 @@ const Auth = () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
-            redirectTo: '/profile/onboarding'
+            redirectTo: "https://internstack.vercel.app/profile/onboarding"
           }
         })
       }
@@ -17,7 +17,7 @@ const Auth = () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'github',
           options: {
-            redirectTo: '/profile/onboarding'
+            redirectTo: "https://internstack.vercel.app/profile/onboarding"
           }
         })
       }
@@ -25,7 +25,7 @@ const Auth = () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'linkedin',
           options: {
-            redirectTo: '/profile/onboarding'
+            redirectTo: "https://internstack.vercel.app/profile/onboarding"
           }
         })
       }
