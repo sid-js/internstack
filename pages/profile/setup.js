@@ -8,6 +8,8 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "react-toastify";
 import { TextInput, Button, Label, Spinner, Textarea } from "flowbite-react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import InternstackIcon from "../../public/icon.svg"
 
 const Setup = ({ Profile }) => {
   const supabase = useSupabaseClient();
@@ -50,8 +52,8 @@ const Setup = ({ Profile }) => {
         <div className="m-auto md:w-8/12 lg:w-6/12 xl:w-6/12">
           <div className="p-8 my-12 sm:p-16">
             <div className="flex flex-row items-center gap-2">
-              <img
-                src="/icon.svg"
+              <Image
+                src={InternstackIcon}
                 loading="lazy"
                 className="w-10"
                 alt="tailus logo"

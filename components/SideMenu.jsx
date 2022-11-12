@@ -14,7 +14,7 @@ export default function SideMenu() {
   const router = useRouter();
   console.log(router.pathname);
   return (
-    <div className="hidden text-lg font-semibold rounded-full drop-shadow-md w-fit md:block">
+    <div className="hidden text-lg font-semibold rounded-full w-fit drop-shadow-md md:block">
       <Sidebar>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
