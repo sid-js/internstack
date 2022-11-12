@@ -9,7 +9,7 @@ export default function Home() {
       <Head>
         <title>Internstack | Home</title>
       </Head>
-      <div className='flex items-center justify-center w-full text-3xl'>This component is In Development</div>
+      <div className='flex items-center justify-center text-3xl w-fit'>This component is In Development</div>
     </HomeLayout>
   )
 }

@@ -166,37 +166,38 @@ export default Onboarding;
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
 export const getServerSideProps = async (ctx) => {
+  console.log("Checking Username")
   const supabaseServer = createServerSupabaseClient(ctx);
   const {
     data: { session },
+    error,
   } = await supabaseServer.auth.getSession();
-  if (session) {
-    const { data: isUsername } = await supabaseServer
-      .from("profiles")
-      .select("username")
-      .eq("id", session.user.id)
-      .single();
-    console.log("Username" + isUsername.username);
-    if (isUsername.username) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/",
-        },
-      };
-    } else {
-      return {
-        props: {
-          Session: session,
-        },
-      };
-    }
-  } else {
+  if (!session) {
     return {
       redirect: {
         permanent: false,
         destination: "/auth",
       },
     };
+  }
+  const { data: Profile } = await supabaseServer
+    .from("profiles")
+    .select("username")
+    .eq("id", session.user.id)
+    .single();
+    console.log(Profile);
+  
+  if (Profile.username != null) {
+    console.log("Username: " + Profile.username);
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  } else {
+    return {
+      props: {Profile}
+    }
   }
 };

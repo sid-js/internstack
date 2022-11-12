@@ -3,38 +3,38 @@ import { TextInput, Button, Label, Spinner } from "flowbite-react";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
-import {HiOutlineMapPin,HiOutlineBuildingLibrary} from "react-icons/hi2";
+import { HiOutlineMapPin, HiOutlineBuildingLibrary } from "react-icons/hi2";
 import Select from "react-select";
 import skillsoptions from "../../utils/skillsoptions";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
 import Head from "next/head";
 
-const Profile = (props) => {
+const Profile = ({Profile}) => {
   const supabase = useSupabaseClient();
   const session = useSession();
-  const [saving,setSaving] = useState(false);
+  const [saving, setSaving] = useState(false);
   const { register, handleSubmit, control } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
     setSaving(true);
-    const {err} = await supabase.from("profiles").update(data).eq("id",session.user.id);
-    if(err) {
-        toast.error("Unable to Save. Please try again.");
-    }
-    else {
-        toast.success("Your Profile was updated Successfuly");
+    const { err } = await supabase
+      .from("profiles")
+      .update(data)
+      .eq("id", session.user.id);
+    if (err) {
+      toast.error("Unable to Save. Please try again.");
+    } else {
+      toast.success("Your Profile was updated Successfuly");
     }
     setSaving(false);
-
-
-  }
-  const initialBio = props.Profile.bio
-    ? props.Profile.bio
+  };
+  const initialBio = Profile?.bio
+    ? Profile.bio
     : "I'm loving Internstack!";
-  const initialName = props.Profile.full_name;
+  const initialName = Profile.full_name;
 
-  console.log(props.Profile);
+
   return (
     <DashboardLayout>
       <Head>
@@ -80,7 +80,14 @@ const Profile = (props) => {
               name="skills"
               control={control}
               render={({ field }) => (
-                <Select {...field} isMulti options={skillsoptions} />
+                <Select
+                  defaultValue={Profile.skills}
+                  {...field}
+                  isMulti
+                  options={skillsoptions}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                />
               )}
             />
           </div>
@@ -92,6 +99,7 @@ const Profile = (props) => {
               name="location"
               id="location"
               type="text"
+              defaultValue={Profile.location}
               icon={HiOutlineMapPin}
               placeholder="Bengaluru, India"
               {...register("location")}
@@ -105,15 +113,24 @@ const Profile = (props) => {
               name="education"
               id="education"
               type="text"
+              defaultValue={Profile.education}
               icon={HiOutlineBuildingLibrary}
               placeholder="Your university/college"
               {...register("education")}
             />
           </div>
           <div>
-          <Button type="submit">{saving?(<><Spinner/>Saving..</>):(<>Save Profile</>)}</Button>
+            <Button type="submit">
+              {saving ? (
+                <>
+                  <Spinner />
+                  Saving..
+                </>
+              ) : (
+                <>Save Profile</>
+              )}
+            </Button>
           </div>
-          
         </form>
       </div>
     </DashboardLayout>
@@ -136,15 +153,16 @@ export const getServerSideProps = async (ctx) => {
       },
     };
 
-  const { data: Profile } = await supabaseServer
+  const { data } = await supabaseServer
     .from("profiles")
     .select("*")
     .eq("id", session.user.id)
     .single();
+  console.log("Fetched Profile: " + data);
 
   return {
     props: {
-      Profile,
+      Profile: data,
     },
   };
 };

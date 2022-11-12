@@ -11,15 +11,15 @@ const Profile = ({ Profile }) => {
       <Head>
         <title>{Profile.username} - Profile</title>
       </Head>
-      <div className="flex flex-col w-full my-6 bg-white rounded-lg drop-shadow-md">
+      <div className="flex flex-col w-full mx-auto bg-white rounded-lg drop-shadow-md">
         <div className="flex flex-row rounded-t-lg h-36 bg-gradient-to-r from-blue-700 to-blue-500"></div>
-        <div className="self-start px-8 -mt-28">
+        <div className="self-start px-4 md:px-8 -mt-28">
           <Avatar size="xl" img={Profile.avatar_url} rounded className="border-4 border-white rounded-full"/>
         </div>
-        <div className="flex flex-col gap-1 px-8 py-3 bg-white rounded-lg h-fit">
+        <div className="flex flex-col gap-1 px-4 py-3 bg-white rounded-lg md:px-8 h-fit">
           <p className="text-3xl font-bold">{Profile.full_name}</p>
           <p className="font-normal text-gray-500 text-md">{Profile.bio?(Profile.bio):("I'm loving Internstack. Looking for projects")}</p>
-          <div className="flex flex-row items-center gap-4 py-3">
+          <div className="flex flex-col items-start justify-start gap-1 py-3 md:gap-4 md:items-center md:flex-row">
             <div className="flex flex-row items-center gap-2">
             <HiOutlineMapPin/><span className="text-base font-normal text-gray-500">{Profile.location?(Profile.location):("India")}</span>
             </div>

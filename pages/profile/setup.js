@@ -27,13 +27,13 @@ const Setup = ({ Profile }) => {
   };
   const onSubmit = async (data) => {
     console.log(data);
-    const {error} = await supabase.from("profiles").update({data}).eq("id",session.user.id);
+    const {error} = await supabase.from("profiles").update(data).eq("id",session.user.id);
     if (error) {
       toast.error("Failed to update profile. Please try again.")
     }
     else {
-      toast.error("Your profile was updated successfully.")
-      router.push("/")
+      toast.success("Your profile was updated successfully.");
+      router.push("/");
     }
 
   };
