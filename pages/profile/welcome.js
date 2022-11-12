@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -6,7 +7,7 @@ const welcome = () => {
     <div className="py-16">
       <div className="container px-6 m-auto space-y-8 text-gray-500 md:px-12 lg:px-20">
         <div className="flex items-center justify-center -space-x-2">
-          <img
+          <Image
             loading="lazy"
             width={370}
             height={370}
@@ -14,7 +15,7 @@ const welcome = () => {
             alt="member photo"
             className="object-cover rounded-full w-14 h-14"
           />
-          <img
+          <Image
             loading="lazy"
             width={370}
             height={370}
@@ -22,7 +23,7 @@ const welcome = () => {
             alt="member photo"
             className="object-cover w-20 h-20 rounded-full"
           />
-          <img
+          <Image
             loading="lazy"
             width={370}
             height={370}
@@ -30,7 +31,7 @@ const welcome = () => {
             alt="member photo"
             className="z-10 object-cover rounded-full h-28 w-28"
           />
-          <img
+          <Image
             loading="lazy"
             width={370}
             height={370}
@@ -38,7 +39,7 @@ const welcome = () => {
             alt="member photo"
             className="relative object-cover w-20 h-20 rounded-full"
           />
-          <img
+          <Image
             loading="lazy"
             width={370}
             height={370}

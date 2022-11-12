@@ -2,6 +2,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Alert, Button, Spinner } from "flowbite-react";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -56,7 +57,7 @@ const Onboarding = () => {
       <div className="relative px-6 m-auto text-gray-500 xl:container md:px-12">
         <div className="m-auto space-y-8 sm:w-4/5 md:w-3/5 xl:w-2/5">
           <div className="p-8 md:py-12">
-            <img
+            <Image
               src="/icon.svg"
               loading="lazy"
               className="w-16"

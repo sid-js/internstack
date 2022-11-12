@@ -12,6 +12,7 @@ import {
   HiMagnifyingGlass,
   HiUser,
 } from "react-icons/hi2";
+import Image from "next/image";
 
 const Header = () => {
   const supabase = useSupabaseClient();
@@ -52,7 +53,7 @@ const Header = () => {
     <Navbar border fluid>
       <Navbar.Toggle />
       <Navbar.Brand href="/">
-        <img
+        <Image
           className="w-32 md:mx-16 md:w-52"
           src="/internstack-logo.svg"
           alt="Internstack"
