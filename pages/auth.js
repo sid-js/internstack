@@ -2,7 +2,10 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-
+import InternstackIcon from "../public/icon.svg"
+import GoogleIcon from "../public/icons/google-icon.svg"
+import GitHubIcon from "../public/icons/github-icon.svg"
+import LinkedInIcon from "../public/icons/linkedin-icon.svg"
 
 const Auth = () => {
     const supabase = useSupabaseClient()
@@ -42,7 +45,7 @@ const Auth = () => {
             <div className="p-8 py-12 sm:p-16">
               <div className="space-y-4">
                 <Image
-                  src="/icon.svg"
+                  src={InternstackIcon}
                   loading="lazy"
                   className="w-10"
                   alt="internstack icon"
@@ -56,7 +59,7 @@ const Auth = () => {
                 <button onClick={signInWithGoogle} className="relative flex items-center px-6 group h-11 before:absolute before:inset-0 before:rounded-full before:bg-white dark:before:bg-gray-700 dark:before:border-gray-600 before:border before:border-gray-200 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 disabled:before:bg-gray-300 disabled:before:scale-100">
                   <span className="relative flex items-center justify-center w-full gap-3 text-base font-medium text-gray-600 dark:text-gray-200">
                     <Image
-                      src="/icons/google-icon.svg"
+                      src={GoogleIcon}
                       className="absolute left-0 w-5"
                       alt="google logo"
                     />
@@ -66,7 +69,7 @@ const Auth = () => {
                 <button onClick={signInWithGitHub} className="relative flex items-center px-6 group h-11 before:absolute before:inset-0 before:rounded-full before:bg-white dark:before:bg-gray-700 dark:before:border-gray-600 before:border before:border-gray-200 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 disabled:before:bg-gray-300 disabled:before:scale-100">
                   <span className="relative flex items-center justify-center w-full gap-3 text-base font-medium text-gray-600 dark:text-gray-200">
                   <Image
-                      src="/icons/github-icon.svg"
+                      src={GitHubIcon}
                       className="absolute left-0 w-5"
                       alt="github logo"
                     />
@@ -76,7 +79,7 @@ const Auth = () => {
                 <button onClick={signInWithLinkedIn} className="relative flex items-center px-6 group h-11 before:absolute before:inset-0 before:rounded-full before:bg-white dark:before:bg-gray-700 dark:before:border-gray-600 before:border before:border-gray-200 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 disabled:before:bg-gray-300 disabled:before:scale-100">
                   <span className="relative flex items-center justify-center w-full gap-3 text-base font-medium text-gray-600 dark:text-gray-200">
                   <Image
-                      src="/icons/linkedin-icon.svg"
+                      src={LinkedInIcon}
                       className="absolute left-0 w-5"
                       alt="linkedin logo"
                     />

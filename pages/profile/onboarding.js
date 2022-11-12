@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import InternstackIcon from "../../public/icon.svg"
 
 const Onboarding = () => {
   const supabase = useSupabaseClient();
@@ -58,7 +59,7 @@ const Onboarding = () => {
         <div className="m-auto space-y-8 sm:w-4/5 md:w-3/5 xl:w-2/5">
           <div className="p-8 md:py-12">
             <Image
-              src="/icon.svg"
+              src={InternstackIcon}
               loading="lazy"
               className="w-16"
               alt="Internstack Icon"

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { TextInput, Button, Label, Spinner, Textarea } from "flowbite-react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import InternstackIcon from "../../public/icon.svg"
 
 const Setup = ({ Profile }) => {
   const supabase = useSupabaseClient();
@@ -52,7 +53,7 @@ const Setup = ({ Profile }) => {
           <div className="p-8 my-12 sm:p-16">
             <div className="flex flex-row items-center gap-2">
               <Image
-                src="/icon.svg"
+                src={InternstackIcon}
                 loading="lazy"
                 className="w-10"
                 alt="tailus logo"

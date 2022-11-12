@@ -1,8 +1,39 @@
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { Spinner } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import User1 from "../../public/users/user-1.jpg"
+import User2 from "../../public/users/user-2.jpg"
+import User3 from "../../public/users/user-3.jpg"
+import User4 from "../../public/users/user-4.jpg"
+import User5 from "../../public/users/user-5.jpg"
 
-const welcome = () => {
+const Welcome = () => {
+    const session = useSession();
+    const supabase = useSupabaseClient();
+    const router = useRouter();
+    const [username,setUsername] = useState();
+    const checkUsername = async () => {
+        const {data,error} = await supabase.from("profiles").select("username").eq("username",session.user.id);
+        if(data.username) {
+            router.push("/");
+        }
+        else {
+            router.push("/profile/onboarding");
+        }
+    }
+    useEffect(() => {
+        if(session){
+            setTimeout(() => {
+                checkUsername();
+            }, 1000);
+            
+        }
+      
+    }, [session])
+    
   return (
     <div className="py-16">
       <div className="container px-6 m-auto space-y-8 text-gray-500 md:px-12 lg:px-20">
@@ -11,7 +42,7 @@ const welcome = () => {
             loading="lazy"
             width={370}
             height={370}
-            src="/users/user-3.jpg"
+            src={User3}
             alt="member photo"
             className="object-cover rounded-full w-14 h-14"
           />
@@ -19,7 +50,7 @@ const welcome = () => {
             loading="lazy"
             width={370}
             height={370}
-            src="/users/user-2.jpg"
+            src={User2}
             alt="member photo"
             className="object-cover w-20 h-20 rounded-full"
           />
@@ -27,7 +58,7 @@ const welcome = () => {
             loading="lazy"
             width={370}
             height={370}
-            src="/users/user-1.jpg"
+            src={User1}
             alt="member photo"
             className="z-10 object-cover rounded-full h-28 w-28"
           />
@@ -35,7 +66,7 @@ const welcome = () => {
             loading="lazy"
             width={370}
             height={370}
-            src="/users/user-4.jpg"
+            src={User4}
             alt="member photo"
             className="relative object-cover w-20 h-20 rounded-full"
           />
@@ -43,7 +74,7 @@ const welcome = () => {
             loading="lazy"
             width={370}
             height={370}
-            src="/users/user-5.jpg"
+            src={User5}
             alt="member photo"
             className="object-cover rounded-full w-14 h-14"
           />
@@ -53,25 +84,15 @@ const welcome = () => {
             Welcome to Internstack
           </h1>
           <p className="text-xl text-center text-gray-600 dark:text-gray-300">
-            Be part of hundreds of developers, designers, writers and join internships and collaborative projects.
+          <Spinner size="lg" className="px-2"/>
+            You are being redirected...
+            
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link
-              href="/profile/onboarding"
-              className="relative flex items-center justify-center w-full h-12 px-8 before:absolute before:inset-0 before:rounded-full before:bg-blue-500 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-            >
-              <span className="relative text-base font-semibold text-white dark:text-dark">
-                Create My Profile
-              </span>
-            </Link> 
-            <p className="pt-10 text-sm text-center text-gray-600 dark:text-gray-300">
-            You will be redirected to our user onboarding page where you will be prompted to fill your profile details.
-          </p>
-          </div>
+          
         </div>
       </div>
     </div>
   );
 };
 
-export default welcome;
+export default Welcome;
