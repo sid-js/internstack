@@ -1,3 +1,4 @@
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Alert, Button, Spinner } from "flowbite-react";
 import Head from "next/head";
@@ -11,24 +12,6 @@ const Onboarding = () => {
   const [loading, setLoading] = useState(false);
   const session = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (session) {
-      checkPreviousUsername();
-    }
-  }, [session]);
-
-  const checkPreviousUsername = async () => {
-    const { data: isUsername } = await supabase
-      .from("profiles")
-      .select("username")
-      .eq("id", session.user.id)
-      .single();
-    console.log(isUsername.username);
-    if (isUsername.username) {
-      router.push(`/profile/${isUsername.username}`);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +36,7 @@ const Onboarding = () => {
         toast.error("Unable to create profile. Please try again.");
       } else {
         toast.success("Your Profile has been created successfully.");
-        router.push("/dashboard/profile");
+        router.push("/profile/setup");
       }
     }
   };
@@ -179,3 +162,41 @@ const Onboarding = () => {
 };
 
 export default Onboarding;
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+export const getServerSideProps = async (ctx) => {
+  const supabaseServer = createServerSupabaseClient(ctx);
+  const {
+    data: { session },
+  } = await supabaseServer.auth.getSession();
+  if (session) {
+    const { data: isUsername } = await supabaseServer
+      .from("profiles")
+      .select("username")
+      .eq("id", session.user.id)
+      .single();
+    console.log("Username" + isUsername.username);
+    if (isUsername.username) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/",
+        },
+      };
+    } else {
+      return {
+        props: {
+          Session: session,
+        },
+      };
+    }
+  } else {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth",
+      },
+    };
+  }
+};
