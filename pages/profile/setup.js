@@ -4,6 +4,7 @@ import { HiOutlineMapPin, HiOutlineBuildingLibrary } from "react-icons/hi2";
 import Select from "react-select";
 import skillsoptions from "../../utils/skillsoptions";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "react-toastify";
 import { TextInput, Button, Label, Spinner, Textarea } from "flowbite-react";
 import { useRouter } from "next/router";
